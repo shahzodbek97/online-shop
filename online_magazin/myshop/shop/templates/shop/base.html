@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}My shop{% endblock %}</title>
+<!--        <link href="{% static 'css/base.css' %}" rel="stylesheet">-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand" href="/">My shop</a>
+             <span class="navbar-text">
+                {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        Sizning savatingiz:
+                        <a href="{% url 'cart:cart_detail' %}">
+                            {{ total_items }} item{{ total_items|pluralize }},
+                            ${{ cart.get_total_price }}
+                        </a>
+                    {% else %}
+                        Sizning savatingiz bo'sh.
+                    {% endif %}
+                {% endwith %}
+                </span>
+        </nav>
+        </div>
+        <div class="container">
+            <div class="row">
+            {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</html>
